@@ -1,9 +1,9 @@
 <?php
 
-namespace Alexwenzel\DependencyContainer\Http\Controllers;
+namespace CataP97\DependencyContainer\Http\Controllers;
 
-use Alexwenzel\DependencyContainer\ActionHasDependencies;
-use Alexwenzel\DependencyContainer\Http\Requests\ActionRequest;
+use CataP97\DependencyContainer\ActionHasDependencies;
+use CataP97\DependencyContainer\Http\Requests\ActionRequest;
 use Laravel\Nova\Http\Requests\ActionRequest as NovaActionRequest;
 use Laravel\Nova\Http\Controllers\ActionController as NovaActionController;
 

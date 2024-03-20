@@ -1,5 +1,5 @@
 {
-    "name": "alexwenzel/nova-dependency-container",
+    "name": "catap97/nova-dependency-container",
     "description": "A Laravel Nova 4 form container for grouping fields that depend on other field values.",
     "keywords": [
         "laravel",
@@ -9,12 +9,8 @@
     ],
     "authors": [
         {
-            "name": "alexwenzel",
-            "email": "alexander.wenzel.berlin@gmail.com"
-        },
-        {
-            "name": "Epartment E-commerce",
-            "email": "support@epartment.nl"
+            "name": "catap97",
+            "email": "postacatalin3@gmail.com"
         }
     ],
     "license": "MIT",
@@ -25,13 +21,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Alexwenzel\\DependencyContainer\\": "src/"
+            "CataP97\\DependencyContainer\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Alexwenzel\\DependencyContainer\\FieldServiceProvider"
+                "CataP97\\DependencyContainer\\FieldServiceProvider"
             ]
         }
     },

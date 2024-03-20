@@ -144,12 +144,25 @@ export default {
                     return;
                 }
 
+                if (dependency.hasOwnProperty('multiselect')
+                    && dependencyValue
+                    && dependency.multiselect.some(object => dependencyValue.includes(object)
+                        || dependencyValue.includes(String(object))
+                        || dependencyValue.map(obj => obj.value).includes(object)
+                        || dependencyValue.map(obj => obj.value).includes(String(object))
+                    )
+                ) {
+                  this.dependenciesSatisfied = true;
+                  return;
+                }
+
                 // perform this check only, if dependency has not other conditions applied
                 // like: empty,notEmpty,nullOrZero,not,in,notin
                 if (dependency.hasOwnProperty('value')
                     && dependencyValue == dependency.value
                     && !dependency.hasOwnProperty('in')
                     && !dependency.hasOwnProperty('notin')
+                    && !dependency.hasOwnProperty('multiselect')
                 ) {
                     this.dependenciesSatisfied = true;
                     return;

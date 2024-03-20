@@ -1,10 +1,10 @@
 <?php
 
-namespace Alexwenzel\DependencyContainer\Http\Requests;
+namespace CataP97\DependencyContainer\Http\Requests;
 
-use Alexwenzel\DependencyContainer\HasDependencies;
+use CataP97\DependencyContainer\HasDependencies;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Alexwenzel\DependencyContainer\DependencyContainer;
+use CataP97\DependencyContainer\DependencyContainer;
 use Laravel\Nova\Http\Requests\ActionRequest as NovaActionRequest;
 
 class ActionRequest extends NovaActionRequest

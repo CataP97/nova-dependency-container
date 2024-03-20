@@ -1,6 +1,6 @@
 <?php
 
-namespace Alexwenzel\DependencyContainer;
+namespace CataP97\DependencyContainer;
 
 trait HasChildFields
 {

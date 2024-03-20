@@ -1,6 +1,6 @@
 <?php
 
-namespace Alexwenzel\DependencyContainer;
+namespace CataP97\DependencyContainer;
 
 use Aqjw\MedialibraryField\Fields\Medialibrary;
 use Aqjw\MedialibraryField\Fields\Support\MediaCollectionRules;
@@ -132,6 +132,22 @@ class DependencyContainer extends Field
     }
 
     /**
+     * Adds a dependency for multiselect
+     *
+     * @param $field
+     * @param $array
+     * @return $this
+     */
+    public function dependsOnMultiselect($field, $array)
+    {
+        return $this->withMeta([
+            'dependencies' => array_merge($this->meta['dependencies'], [
+                array_merge($this->getFieldLayout($field), ['multiselect' => $array]),
+            ]),
+        ]);
+    }
+
+    /**
      * Adds a dependency for not in
      *
      * @param $field
@@ -214,6 +230,16 @@ class DependencyContainer extends Field
             }
 
             if (array_key_exists('notin', $dependency) && !in_array($resource->{$dependency['property']}, $dependency['notin'])) {
+                $this->meta['dependencies'][$index]['satisfied'] = true;
+                continue;
+            }
+
+            if (
+                array_key_exists('multiselect', $dependency)
+                && is_array($dependency['multiselect'])
+                && is_array($resource->{$dependency['property']})
+                && array_intersect($resource->{$dependency['property']}, $dependency['multiselect'])
+            ) {
                 $this->meta['dependencies'][$index]['satisfied'] = true;
                 continue;
             }
@@ -325,6 +351,14 @@ class DependencyContainer extends Field
                 $satisfiedCounts++;
             }
 
+            // dependsOnMultiselect
+            if (array_key_exists('multiselect', $dependency)
+                && is_array($dependency['multiselect'])
+                && is_array($request->get($dependency['property']))
+                && array_intersect($request->get($dependency['property']), $dependency['multiselect'])) {
+                $satisfiedCounts++;
+            }
+
             // dependsOnNot
             if (array_key_exists('not', $dependency) && $dependency['not'] != $request->get($dependency['property'])) {
                 $satisfiedCounts++;
@@ -334,6 +368,7 @@ class DependencyContainer extends Field
             if (array_key_exists('value', $dependency)
                 && !array_key_exists('in', $dependency)
                 && !array_key_exists('notin', $dependency)
+                && !array_key_exists('multiselect', $dependency)
                 && !array_key_exists('nullOrZero', $dependency)
                 && $dependency['value'] == $request->get($dependency['property'])) {
                 $satisfiedCounts++;
